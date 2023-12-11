@@ -1,4 +1,5 @@
 /* give m x k matrix A and k x n matrix B, find AB */
+/* memory is not freed properly as well as checking for valid memory allocation not done properly either. Need to fix */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -27,14 +28,14 @@ int main(void)
     }
 
     // allocate memory for matrices A, B, and C
-    matrixa = malloc(am * sizeof(int));
+    matrixa = malloc(am * sizeof(int *));
     for (int i = 0; i < am; ++i) {
         matrixa[i] = malloc(ak * sizeof(int));
     }
     if (matrixa == NULL) {
         mem_failure();
     }
-    matrixb = malloc(bk * sizeof(int));
+    matrixb = malloc(bk * sizeof(int *));
     for (int i = 0; i < bk; ++i) {
         matrixb[i] = malloc(bn * sizeof(int));
     }
@@ -42,7 +43,7 @@ int main(void)
         free(matrixa);
         mem_failure();
     }
-    matrixc = malloc(bn * sizeof(int));
+    matrixc = malloc(bn * sizeof(int *));
     for (int i = 0; i < bn; ++i) {
         matrixc[i] = malloc(am * sizeof(int));
     }
